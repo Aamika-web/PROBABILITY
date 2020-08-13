@@ -1,0 +1,40 @@
+import random
+
+def draw_ball(hat):
+    index = random.randint(0,10)
+    colour = hat.pop(index)
+    return colour,hat
+
+def draw_ball(hat):
+    index = random.randint(0,10)
+    colour = hat[index]
+    del hat[index]
+    return colour,hat
+
+def draw_ball(hat):
+    colour = random.choice(hat)
+    hat.remove(colour)
+    return colour,hat
+
+
+def new_hat():
+    colours = 'black', 'red', 'blue'
+    hat = []
+    for colour in colours:
+        for i in range(4):
+            hat.append(colour)
+    return hat
+
+n = int(input('How many balls are to be drawn? '))
+N = int(input('How many experiments? '))
+
+M = 0
+for e in range(N):
+    hat = new_hat()
+    balls = []
+    for i in range(n):
+        colour, hat = draw_ball(hat)
+        balls.append(colour)
+    if balls.count('black') >= 2:
+        M += 1
+print('Probability:', float(M)/N)
